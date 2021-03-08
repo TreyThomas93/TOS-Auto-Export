@@ -59,17 +59,21 @@ class AutoExport:
 
     def getWatchlist(self):
 
-        pyautogui.click(282, 144)
+        # MOVES TO WATCHLIST HAMBURGER ICON AND CLICKS
+        pyautogui.click(282, 144) # ABSOLUTE
 
         time.sleep(self.delay)
 
-        pyautogui.move(0, 155)
+        # MOVES DOWN DROPDOWN LIST TO Export to file... TAB
+        pyautogui.move(0, 155) # RELATIVE
 
         pyautogui.click()
 
         time.sleep(self.delay)
 
-        pyautogui.move(500, 215)
+        # MOVES OVER TO THE Save BUTTON ON THE FILE EXPLORER TO SAVE WATCHLIST.
+        # IN THE FILE EXPLORER BEFORE ANYTHING ELSE, CHANGE YOUR DIRECTORY TO YOUR WORKING DIRECTORY. THIS WILL BE THE NEW DEFAULT DIRECTORY FOR NOW ON.
+        pyautogui.move(500, 215) # RELATIVE
 
         time.sleep(self.delay)
 
@@ -101,7 +105,7 @@ class AutoExport:
             print("SYMBOLS EXTRACTED FROM WATCHLIST!\n")
 
             # MOVE CURSOR TO WATCHLIST AND CLICK ON TOP MOST SYMBOL IN LIST
-            pyautogui.click(150, 174)
+            pyautogui.click(150, 174) # ABSOLUTE
 
             # CHECK WHERE WE ARE IN ITERATION, AND ARROW DOWN IF NEED BE
 
@@ -170,32 +174,32 @@ class AutoExport:
         while self.watchlist_length != 0 and self.no_error:
 
             # show report
-            pyautogui.rightClick(start_x, start_y)
+            pyautogui.rightClick(start_x, start_y) # ABSOLUTE
 
             time.sleep(self.delay)
 
-            pyautogui.move(30, 90)
+            pyautogui.move(30, 90) # RELATIVE
 
             time.sleep(self.delay + 0.25)
 
             pyautogui.click()
 
             # export
-            pyautogui.move(520, 40)
+            pyautogui.move(520, 40) # RELATIVE
 
             time.sleep(self.delay)
 
             pyautogui.click()
 
             # save
-            pyautogui.move(-160, -90)
+            pyautogui.move(-160, -90) # RELATIVE
 
             time.sleep(self.delay)
 
             pyautogui.click()
 
             # # overwrite
-            # pyautogui.move(-85, -575)
+            # pyautogui.move(-85, -575) # RELATIVE
 
             # time.sleep(self.delay)
 
@@ -204,7 +208,7 @@ class AutoExport:
             time.sleep(self.delay)
 
             # close
-            pyautogui.move(200, 100)
+            pyautogui.move(200, 100) # RELATIVE
 
             time.sleep(self.delay)
 
