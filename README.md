@@ -40,7 +40,7 @@ Language: Python 3.8+
 ![Alt text](/img/customize_sma_line_to_cover.png)
 
 7. Click apply, and save.
-8. You now should have something like the image below.
+8. You should now have something like the image below.
 
 ![Alt text](/img/basic_chart_cover.png)
 
