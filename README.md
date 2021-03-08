@@ -23,7 +23,10 @@ Language: Python 3.8+
 
 ![Alt text](/img/thinkscript_editor_add_sma.png "")
 
-3. Once back at the main screen, go to your chart where you are displaying the strategy that you just added the SMA line to. Notice how high it is above the actual candles. Thats what we want.
+3. Once back at the main screen, go to your chart where you are displaying the strategy that you just added the SMA line to. Notice how high it is above the actual candles. Thats what we want. (See image below)
+
+![Alt text](/img/sma_line.png "")
+
 4. Next, double click on the SMA line, and a customizing popup will display. Click on the plots dropdown, then click on the SMA tab. The image below is what should be displayed.
 
 ![Alt text](/img/customize_sma_line.png "")
