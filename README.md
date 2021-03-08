@@ -93,7 +93,7 @@ Language: Python 3.8+
 
 10. This process will continue until it reaches the final symbol in the watchlist.
 
-11. Upon completion, an alert will sound letting you know when the program is finished. That way you can be away from your computer and you will hear when it's complete.
+11. Upon completion, an alert will sound letting you know that the program has finished. That way you can be away from your computer and you will hear when it's complete.
 
 ### What if theres an error?
 
