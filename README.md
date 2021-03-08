@@ -61,7 +61,7 @@ Language: Python 3.8+
 
 2. In the file explorer that pops up after you click the Export to file..., get the relative coordinates for the save button. Make sure you change the directory to your working directory before saving. This will set the working directory as the default so you don't have to change it everytime.
 
-![Alt text](/img/export_watchlist_to_local.png)
+![Alt text](/img/export_watchlist_to_local.PNG)
 
 3. After that, you need the the absolute coordinates for the top most symbol in your watchlist. Always make sure that your watchlist is scrolled all the way to the top before you run the program, or you won't export all the files in the watchlist.
 
