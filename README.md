@@ -21,12 +21,12 @@ Language: Python 3.8+
 1. Go into your thinkscript editor for the strategy of your choice and plot a SMA or anything that will plot a line, and multiply it by 2 or more. (See image below)
 2. Once entered, apply and save.
 
-![alt text](https://github.com/TreyThomas93/TOS-Auto-Export/img/thinkscript_editor_add_sma.png "")
+![alt text](https://github.com/TreyThomas93/TOS-Auto-Export/tree/master/img/thinkscript_editor_add_sma.png "")
 
 3. Once back at the main screen, go to your chart where you are displaying the strategy that you just added the SMA line to. Notice how high it is above the actual candles. Thats what we want.
 4. Next, double click on the SMA line, and a customizing popup will display. Click on the plots dropdown, then click on the SMA tab. The image below is what should be displayed.
 
-![alt text](https://github.com/TreyThomas93/TOS-Auto-Export/img/customize_sma_line.png "")
+![alt text](https://github.com/TreyThomas93/TOS-Auto-Export/tree/master/img/customize_sma_line.png "")
 
 5. Next, we need to change the draw as display, which changes how the plot is shown on the chart.
 6. We need to change this to a bar/histogram that covers the entire chart. (See image below)
