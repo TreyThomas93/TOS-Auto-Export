@@ -34,3 +34,4 @@ Language: Python 3.8+
 5. Next, we need to change the draw as display, which changes how the plot is shown on the chart.
 6. We need to change this to a bar/histogram that covers the entire chart. (See image below)
 
+![Alt text](/img/customize_sma_line_to_cover.png "")
