@@ -93,6 +93,8 @@ Language: Python 3.8+
 
 10. This process will continue until it reaches the final symbol in the watchlist.
 
+11. Upon completion, an alert will sound letting you know when the program is finished. That way you can be away from your computer and you will hear when it's complete.
+
 ### What if theres an error?
 
 - Well, the program can handle that. Just restart the program, and make sure that the watchlist is all the way to the top, and the program will automatically scroll down to where the program left off.
