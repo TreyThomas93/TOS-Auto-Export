@@ -6,8 +6,8 @@ import time
 from pprint import pprint
 import shutil
 from playsound import playsound
-import threading
 import keyboard
+import statistics
 
 
 class AutoExport:
@@ -42,29 +42,20 @@ class AutoExport:
 
         print(error)
 
-        # REMOVE ALL EXISTING CSV FILES FROM DOCUMENTS FOLDER
-        for file in os.listdir(self.path):
+        # REMOVE ALL EXISTING STRATEGY REPORTS CSV FILES FROM DOCUMENTS FOLDER
+        for file in os.listdir(export.path):
 
             sep = file.split("_")
 
             if file.endswith(".csv") and sep[0].strip() == "StrategyReports":
+                
+                try:
 
-                os.remove(file)
+                    os.remove(os.path.join(export.path, file))
 
-    def checkHotKey(self):
+                except:
 
-        while self.no_error:
-
-            try:
-
-                if keyboard.is_pressed('ctrl+c'):
-
-                    self.throwError(
-                        "CTRL C PRESSED - STOPPING PROGRAM - PLEASE RESTART")
-
-            except Exception as e:
-
-                print(e)
+                    pass
 
     def getWatchlist(self):
 
@@ -107,11 +98,21 @@ class AutoExport:
 
             os.remove(self.watchlist_file)
 
+            print("SYMBOLS EXTRACTED FROM WATCHLIST!\n")
+
+            # MOVE CURSOR TO WATCHLIST AND CLICK ON TOP MOST SYMBOL IN LIST
+            pyautogui.click(150, 174)
+
+            # CHECK WHERE WE ARE IN ITERATION, AND ARROW DOWN IF NEED BE
+
+            for _ in range(len(
+                    [file for file in os.listdir("csv_files")])):
+
+                pyautogui.press(['down'])
+
             # SUBTRACT ALREADY EXISTING COUNT IN CSV FILES DIRECTORY FROM WATCHLIST LENGTH
             self.watchlist_length -= len(
                 [file for file in os.listdir("csv_files")])
-
-            print("SYMBOLS EXTRACTED FROM WATCHLIST!\n")
 
             print("BEGINNING AUTO EXPORTS....")
 
@@ -132,9 +133,15 @@ class AutoExport:
 
                 if f.endswith('.csv') and sep[0].strip() == "StrategyReports":
 
-                    shutil.move(os.path.join(root, f), dst_dir)
+                    try:
 
-                    self.watchlist_length -= 1
+                        shutil.move(os.path.join(root, f), dst_dir)
+
+                        self.watchlist_length -= 1
+
+                    except shutil.Error as e:
+
+                        self.throwError(e)
 
                     return
 
@@ -143,8 +150,6 @@ class AutoExport:
         self.throwError("MISSED EXPORT - STOPPING PROGRAM - PLEASE RESTART")
 
     def start(self):
-
-        threading.Thread(target=self.checkHotKey, daemon=True).start()
 
         start = time.perf_counter()
 
@@ -156,6 +161,11 @@ class AutoExport:
         # WILL NEED TO BE ADJUSTED BASED ON SCREEN SIZE
         start_x = int(screen_width / 2.660194174757281)
         start_y = int(screen_length / 1.728)
+
+        # GET AVERAGE ITERATION CYCLE TIME AND GET ESTIMATED TIME REMAINING
+        cycles = []
+
+        previous_cycle_time = None
 
         while self.watchlist_length != 0 and self.no_error:
 
@@ -217,8 +227,23 @@ class AutoExport:
                 running_time = time.strftime(
                     '%H:%M:%S', time.gmtime(middle - start))
 
+                if len(cycles) > 2:
+
+                    time_remaining = time.strftime(
+                        '%H:%M:%S', time.gmtime(statistics.mean(cycles) * self.watchlist_length))
+
+                else:
+
+                    time_remaining = "N/A"
+
                 print(
-                    f"REMAINING --> {self.watchlist_length} | RUNNING TIME: {running_time} | EST. TIME REMAINING: N/A")
+                    f"REMAINING --> {self.watchlist_length} | RUNNING TIME: {running_time} | EST. TIME REMAINING: {time_remaining}")
+
+                if previous_cycle_time != None:
+
+                    cycles.append((middle - start) - previous_cycle_time)
+
+                previous_cycle_time = middle - start
 
         if self.no_error:
 
