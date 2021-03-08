@@ -127,14 +127,14 @@ class AutoExport:
             # SUBTRACT ALREADY EXISTING COUNT IN CSV FILES DIRECTORY FROM WATCHLIST LENGTH
             self.watchlist_length -= len(
                 [file for file in os.listdir("csv_files")])
+            self.start()
+            # proceed = input("Proceed? (y/n): ")
 
-            proceed = input("Proceed? (y/n): ")
+            # if proceed.upper() == "Y":
 
-            if proceed.upper() == "Y":
+            #     print("BEGINNING AUTO EXPORTS....")
 
-                print("BEGINNING AUTO EXPORTS....")
-
-                self.start()
+            #     self.start()
 
     def moveCSVFile(self):
 

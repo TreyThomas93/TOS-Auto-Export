@@ -99,6 +99,10 @@ Language: Python 3.8+
 
 - Well, the program can handle that. Just restart the program, and make sure that the watchlist is all the way to the top, and the program will automatically scroll down to where the program left off.
 
-- If there is an error, an alert sound will trigger, all remaining strategy reports located in the users documents folder will be deleted, and the error message will display in your terminal. 
+- If there is an error, an alert sound will trigger, all remaining strategy reports located in the users documents folder will be deleted, and the error message will display in your terminal.
 
 - Most common error is when there is a missed export, due to either the user moving the mouse or Thinkorswim not loading charts fast enough, or not at all.
+
+### Video below shows the program in action.
+
+[![TOS Auto Export Demo](https://yt-embed.herokuapp.com/embed?v=_nUJVA0clU0)](https://www.youtube.com/watch?v=_nUJVA0clU0 "TOS Auto Export Demo")
