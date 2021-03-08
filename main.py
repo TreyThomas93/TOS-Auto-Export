@@ -28,9 +28,15 @@ class AutoExport:
         # TOTAL NUMBER OF SYMBOLS IN WATCHLIST
         self.watchlist_length = 0
 
-        # ADDED CONDITIONAL FOR THE WHILE LOOP.
+        self.watchlist_length_copy = 0
+
+        self.watchlist_symbols = []
+
+        # ADDED CONDITIONAL FOR THE WHILE LOOP IN START METHOD.
         # IF ERROR, ATTRIBUTE WILL BE SET TO FALSE AND WHILE LOOP WILL STOP
         self.no_error = True
+
+        self.on_start = True
 
     def throwError(self, error):
 
@@ -100,11 +106,15 @@ class AutoExport:
 
                     self.watchlist_length += 1
 
+                    self.watchlist_length_copy += 1
+
+                    self.watchlist_symbols.append(row[0])
+
             os.remove(self.watchlist_file)
 
             print("SYMBOLS EXTRACTED FROM WATCHLIST!\n")
 
-            # MOVE CURSOR TO WATCHLIST AND CLICK ON TOP MOST SYMBOL IN LIST
+            # MOVES CURSOR TO WATCHLIST AND CLICKS ON TOP MOST SYMBOL IN LIST
             pyautogui.click(150, 174) # ABSOLUTE
 
             # CHECK WHERE WE ARE IN ITERATION, AND ARROW DOWN IF NEED BE
@@ -118,11 +128,13 @@ class AutoExport:
             self.watchlist_length -= len(
                 [file for file in os.listdir("csv_files")])
 
-            print("BEGINNING AUTO EXPORTS....")
+            proceed = input("Proceed? (y/n): ")
 
-            time.sleep(5)
+            if proceed.upper() == "Y":
 
-            self.start()
+                print("BEGINNING AUTO EXPORTS....")
+
+                self.start()
 
     def moveCSVFile(self):
 
@@ -139,9 +151,22 @@ class AutoExport:
 
                     try:
 
+                        # MOVES MOST RECENT STRATEGY REPORT FILE FROM DOCUMENTS FOLDER TO CSV_FILES FOLDER
                         shutil.move(os.path.join(root, f), dst_dir)
 
+                        # SUBSTRACTS ONE FROM WATCHLIST_LENGTH ATTRIBUTE
+                        # THIS TELLS US HOW MANY MORE FILES TO EXPECT
                         self.watchlist_length -= 1
+
+                        # RESET WATCHLIST_LENGTH IF PROGRAM RESTART FROM DIFFERENT SYMBOL
+
+                        if self.on_start:
+                            
+                            symbol = sep[1].strip()
+                            
+                            self.watchlist_length = self.watchlist_length_copy - (self.watchlist_symbols.index(symbol) + 1)
+                            
+                            self.on_start = False
 
                     except shutil.Error as e:
 
@@ -161,7 +186,7 @@ class AutoExport:
         screen_width, screen_length = pyautogui.size()
 
         # START_X AND START_Y ARE BOTH WHERE THE MOUSE ARROW WILL START ON SCREEN.
-        # THIS SHOULD BE PLACED WHERE THE CHART IS TO BE ABLE TO GET THE REPORTS.
+        # THIS SHOULD BE PLACED WITHIN THE SMA BAR GRAPH TO BE ABLE TO GET THE REPORTS.
         # WILL NEED TO BE ADJUSTED BASED ON SCREEN SIZE
         start_x = int(screen_width / 2.660194174757281)
         start_y = int(screen_length / 1.728)
@@ -173,7 +198,7 @@ class AutoExport:
 
         while self.watchlist_length != 0 and self.no_error:
 
-            # show report
+            # SHOW REPORT BUTTON
             pyautogui.rightClick(start_x, start_y) # ABSOLUTE
 
             time.sleep(self.delay)
@@ -184,14 +209,14 @@ class AutoExport:
 
             pyautogui.click()
 
-            # export
+            # EXPORT FILE BUTTON
             pyautogui.move(520, 40) # RELATIVE
 
             time.sleep(self.delay)
 
             pyautogui.click()
 
-            # save
+            # SAVE BUTTON (save strategy report to documents folder)
             pyautogui.move(-160, -90) # RELATIVE
 
             time.sleep(self.delay)
@@ -207,7 +232,7 @@ class AutoExport:
 
             time.sleep(self.delay)
 
-            # close
+            # CLOSE BUTTON (close out of the strategy report)
             pyautogui.move(200, 100) # RELATIVE
 
             time.sleep(self.delay)
@@ -216,7 +241,7 @@ class AutoExport:
 
             time.sleep(self.delay)
 
-            # next symbol
+            # NEXT SYMBOL (arrows down to next symbol in watchlist)
             pyautogui.press(['down'])
 
             time.sleep(self.delay + .3)
